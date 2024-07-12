@@ -1,5 +1,7 @@
 var balance = 0;
 var boost = 1;
+var passive = 0;
+var passiveInterval;
 
 function tap(element) {
     balance = balance + (1 * boost);
@@ -19,6 +21,31 @@ function buyboost(elem) {
         setTimeout(() => {
             elem.innerHTML = "Купить";
             elem.style.background = "white";
+        }, 2000);
+    }
+}
+
+function passiveincome(eleme) {
+    if (balance >= 100) {
+        balance = balance - 100;
+        passive++
+        document.getElementById('pass').innerHTML = passive + "/сек";
+        document.getElementById('tap').innerHTML = balance;
+        console.log(passive);
+
+        if (passiveInterval) {
+            clearInterval(passiveInterval);
+        }
+        passiveInterval = setInterval(() => {
+            balance = balance + passive;
+            document.getElementById('tap').innerHTML = balance;
+        }, 1000);
+    } else {
+        eleme.innerHTML = "Недостаточно монет";
+        eleme.style.background = 'red';
+        setTimeout(() => {
+            eleme.innerHTML = "Улучшить";
+            eleme.style.background = "white";
         }, 2000);
     }
 }
