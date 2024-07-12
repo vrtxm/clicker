@@ -2,6 +2,8 @@ var balance = 0;
 var boost = 1;
 var passive = 0;
 var passiveInterval;
+var price = 50;
+var pricepassive = 100;
 
 function tap(element) {
     balance = balance + (1 * boost);
@@ -10,9 +12,11 @@ function tap(element) {
 }
 
 function buyboost(elem) {
-    if (balance >= 50) {
-        balance = balance - 50;
+    if (balance >= price) {
+        balance = balance - price;
+        price = price * 2;
         boost++
+        document.getElementById('cena').innerHTML = "Цена: " + price;
         document.getElementById('lvl').innerHTML = "Lvl. " + (boost - 1);
         document.getElementById('tap').innerHTML = balance;
     } else {
@@ -26,9 +30,11 @@ function buyboost(elem) {
 }
 
 function passiveincome(eleme) {
-    if (balance >= 100) {
-        balance = balance - 100;
+    if (balance >= pricepassive) {
+        balance = balance - pricepassive;
+        pricepassive = pricepassive * 2
         passive++
+        document.getElementById('cenapassive').innerHTML = "Цена: " + pricepassive
         document.getElementById('pass').innerHTML = passive + "/сек";
         document.getElementById('tap').innerHTML = balance;
         console.log(passive);
